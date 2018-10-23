@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace MusicAPI.Models
 {
@@ -22,10 +23,12 @@ namespace MusicAPI.Models
         public string Label {get;set;}
 
         [Required]
+        [JsonIgnore]
         public int ArtistId {get;set;}
         public Artist Artist {get;set;}
 
         [Required]
+        [JsonIgnore]
         public int GenreId {get;set;}
         public Genre Genre {get;set;}
     }
