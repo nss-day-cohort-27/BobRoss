@@ -44,7 +44,7 @@ namespace MusicAPI {
                     Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddCors (o => o.AddPolicy ("JukeboxPolicy", builder => {
-                builder.AllowAnyOrigin ()
+                builder.WithOrigins ("http://localhost:3000")
                     .AllowAnyMethod ()
                     .AllowAnyHeader ();
             }));

@@ -2,6 +2,7 @@ import { Route } from 'react-router-dom'
 import React, { Component } from "react"
 import SongList from './song/SongList'
 import Login from './auth/APILogin';
+import NewSong from './song/NewSong';
 
 
 class ApplicationViews extends Component {
@@ -28,9 +29,9 @@ class ApplicationViews extends Component {
                 <Route exact path="/login" render={(props) => {
                     return <Login />
                 }} />
-                {/* <Route exact path="/create" render={(props) => {
+                <Route exact path="/create" render={(props) => {
                     return <NewSong />
-                }} /> */}
+                }} />
             </React.Fragment>
         )
     }
