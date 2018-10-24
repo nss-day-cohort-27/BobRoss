@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MusicFavorites.Models;
 
-/*
-    dotnet aspnet-codegenerator controller -name FavoriteSongsController -actions -m FavoriteSong -dc ApplicationDbContext -outDir Controllers
- */
-
-
 namespace MusicFavorites.Controllers
 {
     public class HomeController : Controller

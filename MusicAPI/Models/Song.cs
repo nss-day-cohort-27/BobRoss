@@ -18,17 +18,17 @@ namespace MusicAPI.Models
         [Required]
         public DateTime ReleaseDate {get;set;}
 
-        [JsonIgnore]
+        [Required]
         public int GenreId {get;set;}
 
         public Genre Genre {get;set;}
 
-        [JsonIgnore]
+        [Required]
         public int ArtistId {get;set;}
 
         public Artist Artist {get;set;}
 
-        [JsonIgnore]
+        [Required]
         public int AlbumId {get;set;}
 
         public Album Album {get;set;}

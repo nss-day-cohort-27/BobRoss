@@ -36,7 +36,6 @@ namespace MusicAPI.Controllers
 
         // GET: api/Songs
         [HttpGet]
-        [Authorize]
         public IEnumerable<Song> GetSong()
         {
 
@@ -85,6 +84,7 @@ namespace MusicAPI.Controllers
 
         // PUT: api/Songs/5
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutSong([FromRoute] int id, [FromBody] Song song)
         {
             if (!ModelState.IsValid)
@@ -120,6 +120,7 @@ namespace MusicAPI.Controllers
 
         // POST: api/Songs
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> PostSong([FromBody] Song song)
         {
             if (!ModelState.IsValid)
@@ -135,6 +136,7 @@ namespace MusicAPI.Controllers
 
         // DELETE: api/Songs/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteSong([FromRoute] int id)
         {
             if (!ModelState.IsValid)

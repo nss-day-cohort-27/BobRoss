@@ -1,0 +1,42 @@
+@model MusicFavorites.Models.FavoriteSong
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>FavoriteSong</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SongURL)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SongURL)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUserId)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="FavoriteSongId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
+</body>
+</html>
