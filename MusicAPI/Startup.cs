@@ -34,14 +34,20 @@ namespace MusicAPI {
                     Configuration.GetConnectionString ("DefaultConnection")));
 
             services.AddDefaultIdentity<User> ()
-                .AddRoles<IdentityRole>()
+                .AddRoles<IdentityRole> ()
                 .AddEntityFrameworkStores<ApplicationDbContext> ();
 
             services.AddMvc ()
                 .SetCompatibilityVersion (CompatibilityVersion.Version_2_1)
-                .AddJsonOptions(x =>
+                .AddJsonOptions (x =>
                     x.SerializerSettings.ReferenceLoopHandling =
-                        Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddCors (o => o.AddPolicy ("JukeboxPolicy", builder => {
+                builder.AllowAnyOrigin ()
+                    .AllowAnyMethod ()
+                    .AllowAnyHeader ();
+            }));
 
             // Set up JWT authentication service
             services.AddAuthentication (options => {

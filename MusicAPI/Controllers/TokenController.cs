@@ -18,6 +18,7 @@ namespace MusicAPI.Controllers
 
     [Route("/api/token")]
     [ApiController]
+    [EnableCors("JukeboxPolicy")]
     public class TokenController : ControllerBase
     {
         private ApplicationDbContext _context;
