@@ -1,5 +1,13 @@
 # Project Setup
 
+Start new API
+
+```sh
+dotnet new webapi -n WhateverAPI --auth Individual
+```
+
+
+
 These steps need to happen for both the API and the Web Application projects.
 
 Install the global Code Generation Tool for ASP.NET by visiting the [NuGet package page](https://www.nuget.org/packages/dotnet-aspnet-codegenerator/) and running the command shown there.

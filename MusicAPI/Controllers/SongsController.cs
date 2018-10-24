@@ -59,7 +59,6 @@ namespace MusicAPI.Controllers
 
         // GET: api/Songs/5
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<IActionResult> GetSong([FromRoute] int id)
         {
             if (!ModelState.IsValid)
