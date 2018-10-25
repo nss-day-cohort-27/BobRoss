@@ -1,10 +1,37 @@
-# Project Setup
+# Bob Ross System for NSS Students
 
-Start new API
+## Project Details
+
+### Platform
+
+These projects were written for the .NET Core platform.
+
+* .NET Core version 2.1
+* SQLite database
+
+### Web API
+
+The API was created with the following command.
 
 ```sh
-dotnet new webapi -n WhateverAPI --auth Individual
+dotnet new webapi -n MusicAPI --auth Individual
 ```
+
+## API Setup
+
+```sh
+cd MusicAPI
+dotnet restore
+```
+
+If you want to run on Windows and SQL Server, you need to delete the existing migration and create your own.
+
+```sh
+rm -rf Migrations
+dotnet ef migrations add InitialSetup
+dotnet ef database update
+```
+
 
 
 

@@ -11,7 +11,6 @@ namespace MusicFavorites.Models
         [Required]
         public string SongURL {get;set;}
 
-        [Required]
         public int ApplicationUserId {get;set;}
 
         public ApplicationUser ApplicationUser {get;set;}

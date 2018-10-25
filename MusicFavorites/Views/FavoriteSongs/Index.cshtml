@@ -1,20 +1,11 @@
 @model IEnumerable<MusicFavorites.Models.FavoriteSong>
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Favorite Songs";
 }
 
-<!DOCTYPE html>
+<h2>@ViewData["Title"]</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -28,7 +19,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.SongURL)
@@ -42,8 +33,9 @@
                 <a asp-action="Delete" asp-route-id="@item.FavoriteSongId">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
-</body>
-</html>
+
+
+<script src=@(String.Format("{0}{1}{2}", "js/", ViewData["script"], ".js"))></script>

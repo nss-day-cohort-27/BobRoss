@@ -10,7 +10,6 @@ namespace MusicFavorites.Models
         [Required]
         public string AlbumURL {get;set;}
 
-        [Required]
         public int ApplicationUserId {get;set;}
 
         public ApplicationUser ApplicationUser {get;set;}

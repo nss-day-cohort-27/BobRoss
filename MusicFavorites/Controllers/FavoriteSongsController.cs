@@ -8,17 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using MusicFavorites.Data;
 using MusicFavorites.Models;
 
-/*
-    This controller was scaffolded:
-
-    dotnet aspnet-codegenerator controller
-        -name FavoriteSongsController
-        -actions
-        -m FavoriteSong
-        -dc ApplicationDbContext
-        -outDir Controllers
- */
-
 namespace MusicFavorites.Controllers
 {
     public class FavoriteSongsController : Controller
@@ -33,6 +22,7 @@ namespace MusicFavorites.Controllers
         // GET: FavoriteSongs
         public async Task<IActionResult> Index()
         {
+            ViewData["script"] = "getSongList";
             return View(await _context.FavoriteSong.ToListAsync());
         }
 

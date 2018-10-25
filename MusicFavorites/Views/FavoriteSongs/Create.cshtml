@@ -1,20 +1,11 @@
 @model MusicFavorites.Models.FavoriteSong
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Create";
 }
 
-<!DOCTYPE html>
+<h2>@ViewData["Title"]</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-</head>
-<body>
-
-<h4>FavoriteSong</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -40,5 +31,4 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-</body>
-</html>
+<script src="<% ViewData["script"]%>.js"></script>
