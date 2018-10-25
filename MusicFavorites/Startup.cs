@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using MusicFavorites.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MusicFavorites.Models;
 
 namespace MusicFavorites
 {
@@ -38,7 +39,7 @@ namespace MusicFavorites
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

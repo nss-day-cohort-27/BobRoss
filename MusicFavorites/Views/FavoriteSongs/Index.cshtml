@@ -6,14 +6,16 @@
 
 <h2>@ViewData["Title"]</h2>
 
+<div class="songSelector">
+    <select class="remoteSongList"></select>
+    <button class="addFavorite">Add Favorite</button>
+</div>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.SongURL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ApplicationUserId)
+                @Html.DisplayNameFor(model => model.SongTitle)
             </th>
             <th></th>
         </tr>
@@ -22,10 +24,7 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.SongURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationUserId)
+                @Html.DisplayFor(modelItem => item.SongTitle)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.FavoriteSongId">Edit</a> |
@@ -38,4 +37,3 @@
 </table>
 
 
-<script src=@(String.Format("{0}{1}{2}", "js/", ViewData["script"], ".js"))></script>

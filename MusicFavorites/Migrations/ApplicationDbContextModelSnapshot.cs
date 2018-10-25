@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicFavorites.Data;
 
-namespace MusicFavorites.Data.Migrations
+namespace MusicFavorites.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -229,6 +229,9 @@ namespace MusicFavorites.Data.Migrations
 
                     b.Property<string>("ApplicationUserId1");
 
+                    b.Property<string>("SongTitle")
+                        .IsRequired();
+
                     b.Property<string>("SongURL")
                         .IsRequired();
 
@@ -246,7 +249,7 @@ namespace MusicFavorites.Data.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired();
 
-                    b.Property<string>("Lastname")
+                    b.Property<string>("LastName")
                         .IsRequired();
 
                     b.ToTable("ApplicationUser");

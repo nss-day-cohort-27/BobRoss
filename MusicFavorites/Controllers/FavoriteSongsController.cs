@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,15 +15,26 @@ namespace MusicFavorites.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public FavoriteSongsController(ApplicationDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public FavoriteSongsController(
+            ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
 
         // GET: FavoriteSongs
         public async Task<IActionResult> Index()
         {
-            ViewData["script"] = "getSongList";
+            ViewData["scripts"] = new List<string>() {
+                "getSongList",
+                "addSong"
+            };
             return View(await _context.FavoriteSong.ToListAsync());
         }
 
@@ -54,16 +66,20 @@ namespace MusicFavorites.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FavoriteSongId,SongURL,ApplicationUserId")] FavoriteSong favoriteSong)
+        public async Task<IActionResult> Create([FromBody] FavoriteSong song)
         {
             if (ModelState.IsValid)
             {
+                FavoriteSong favoriteSong = new FavoriteSong() {
+                    SongURL = $"http://localhost:5555/songs/{song.SongURL}",
+                    SongTitle = song.SongTitle,
+                    ApplicationUser = await GetCurrentUserAsync()
+                };
                 _context.Add(favoriteSong);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(favoriteSong);
+            return BadRequest();
         }
 
         // GET: FavoriteSongs/Edit/5

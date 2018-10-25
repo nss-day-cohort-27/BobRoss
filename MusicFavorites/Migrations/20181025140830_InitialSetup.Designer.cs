@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicFavorites.Data;
 
-namespace MusicFavorites.Data.Migrations
+namespace MusicFavorites.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181023131844_Initial")]
-    partial class Initial
+    [Migration("20181025140830_InitialSetup")]
+    partial class InitialSetup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -231,6 +231,9 @@ namespace MusicFavorites.Data.Migrations
 
                     b.Property<string>("ApplicationUserId1");
 
+                    b.Property<string>("SongTitle")
+                        .IsRequired();
+
                     b.Property<string>("SongURL")
                         .IsRequired();
 
@@ -248,7 +251,7 @@ namespace MusicFavorites.Data.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired();
 
-                    b.Property<string>("Lastname")
+                    b.Property<string>("LastName")
                         .IsRequired();
 
                     b.ToTable("ApplicationUser");
