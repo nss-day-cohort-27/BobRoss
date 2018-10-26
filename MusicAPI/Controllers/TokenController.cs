@@ -18,19 +18,36 @@ namespace MusicAPI.Controllers
 
     [Route("/api/token")]
     [ApiController]
-    [EnableCors("JukeboxPolicy")]
     public class TokenController : ControllerBase
     {
         private ApplicationDbContext _context;
         private readonly SignInManager<User> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+        private string[] roles = new [] { "User", "Manager", "Administrator" };
+        private async Task InitializeRoles (RoleManager<IdentityRole> roleManager) {
+            foreach (var role in roles) {
+                if (!await roleManager.RoleExistsAsync (role)) {
+                    var newRole = new IdentityRole (role);
+                    await roleManager.CreateAsync (newRole);
+                    // In the real world, there might be claims associated with roles
+                    // _roleManager.AddClaimAsync(newRole, new )
+                }
+            }
+        }
+
 
         public TokenController(
             ApplicationDbContext ctx,
-            SignInManager<User> signInManager
+            SignInManager<User> signInManager,
+            RoleManager<IdentityRole> roleManager
         )
         {
+            _roleManager = roleManager;
             _context = ctx;
             _signInManager = signInManager;
+
+            InitializeRoles(roleManager);
         }
 
         [HttpGet]
@@ -44,12 +61,16 @@ namespace MusicAPI.Controllers
         [HttpPut]
         [Authorize]
         public IActionResult Put(){
+            string role = "Administrator";
             return new ObjectResult(GenerateToken(User.Identity.Name));
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]NewUser postUser)
         {
+            // Hard coding role here for now
+            string role = "Administrator";
+
             // Check simplistic username and password validation rules
             bool isValid = IsValidUserAndPasswordCombination(postUser.Username, postUser.Password);
 
@@ -106,7 +127,8 @@ namespace MusicAPI.Controllers
             {
                 new Claim(ClaimTypes.Name, username),
                 new Claim(JwtRegisteredClaimNames.Nbf, new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString()),
-                new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.Now.AddDays(1)).ToUnixTimeSeconds().ToString())
+                new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.Now.AddDays(1)).ToUnixTimeSeconds().ToString()),
+                new Claim(ClaimTypes.Role, "Administrator"),
             };
 
             var token = new JwtSecurityToken(
