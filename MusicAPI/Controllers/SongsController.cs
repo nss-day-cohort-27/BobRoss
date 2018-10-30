@@ -88,6 +88,12 @@ namespace MusicAPI.Controllers
         [Authorize]
         public async Task<IActionResult> PutSong([FromRoute] int id, [FromBody] Song song)
         {
+            /*
+                If you need to get the Identity user that was created when you
+                first generated your token, you can look it up with User.Identity.Name
+             */
+            var user = _context.User.Where(u => u.UserName == User.Identity.Name);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
