@@ -9,12 +9,53 @@ These projects were written for the .NET Core platform.
 * .NET Core version 2.1
 * SQLite database
 
+### Web Application
+
+The web app was generated with the following command.
+
+```sh
+dotnet new mvc -n MusicFavorites --auth Individual
+```
+
+The web application uses Identity Framework for user management and authentication. Since .NET Core 2.1, the default Identity Razor template are in a Razor Page Archive, and therefore not available for modification. If you want to customize any of those templates, you need to generate override templates.
+
+This project generated those with the following command.
+
+```sh
+dotnet aspnet-codegenerator identity \
+    -dc MusicFavorites.Data.ApplicationDbContext \
+    --files "Account.Register;Account.Login;Account.Logout"
+```
+
+Controllers were scaffolded.
+
+```sh
+dotnet aspnet-codegenerator controller \
+    -name FavoriteSongsController \
+    -actions \
+    -m FavoriteSong \
+    -dc ApplicationDbContext \
+    -outDir Controllers
+```
+
 ### Web API
 
 The API was created with the following command.
 
 ```sh
 dotnet new webapi -n MusicAPI --auth Individual
+```
+
+The controllers were also scaffolded.
+
+```sh
+dotnet aspnet-codegenerator controller \
+    -name SongsController \
+    -api \
+    -async \
+    -m Song \
+    -dc ApplicationDbContext \
+    -outDir Controllers
 ```
 
 ## API Setup
@@ -31,9 +72,6 @@ rm -rf Migrations
 dotnet ef migrations add InitialSetup
 dotnet ef database update
 ```
-
-
-
 
 These steps need to happen for both the API and the Web Application projects.
 
