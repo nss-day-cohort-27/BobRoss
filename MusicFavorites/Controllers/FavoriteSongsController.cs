@@ -68,6 +68,10 @@ namespace MusicFavorites.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] FavoriteSong song)
         {
+            if (song.FavoriteSongId == 0) {
+                return BadRequest("Invalid song id 0");
+            }
+
             if (ModelState.IsValid)
             {
                 FavoriteSong favoriteSong = new FavoriteSong() {
@@ -77,9 +81,9 @@ namespace MusicFavorites.Controllers
                 };
                 _context.Add(favoriteSong);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Ok(favoriteSong);
             }
-            return BadRequest();
+            return BadRequest(ModelState);
         }
 
         // GET: FavoriteSongs/Edit/5
