@@ -28,7 +28,9 @@ export default class Login extends Component {
             },
             "body": JSON.stringify({
                 "username": this.state.username,
-                "password": this.state.password
+                "password": this.state.password,
+                "firstName": "Admina",
+                "lastName": "Straytor"
             })
         })
         .then(res => res.text())
